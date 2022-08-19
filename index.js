@@ -61,12 +61,14 @@ function getFinals(arr) {
     const finalStageGames = arr.filter(game => {
         return game.Stage === "Final"}
         );
-    const finalStageTeams = finalStageGames.map(game => {
-        return {"Year": game["Year"],
-            "Home Team Name": game ["Home Team Name"],
-            "Away Team Name": game ["Away Team Name"] };
-    });
-    return (finalStageTeams);
+
+        return finalStageGames;
+    // //const finalStageTeams = finalStageGames.map(game => {
+    //     return {"Year": game["Year"],
+    //         "Home Team Name": game ["Home Team Name"],
+    //         "Away Team Name": game ["Away Team Name"] };
+    // });
+    // return (finalStageTeams);
  }
 
 getFinals(fifaData);
@@ -88,6 +90,8 @@ function getYears(arr, callback) {
     return yearsArray;
 }
 
+getYears(fifaData,getFinals);
+
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -98,10 +102,23 @@ Use the higher-order function getWinners to do the following:
 💡 HINT: Don't worry about ties for now (Please see the README file for info on ties for a stretch goal.)
 4. Returns the names of all winning countries in an array called `winners` */ 
 
-function getWinners(/* code here */) {
-    /* code here */
+function getWinners(arr, callback) {
+    const finalsArray = callback(arr);
+    const winners = [];
+    finalsArray.forEach(game =>{
+        if (game['Home Team Goals'] > game['Away Team Goals']) {
+            winners.push(game['Home Team Name']);
+        } else if (game['Away Team Goals'] > game['Home Team Goals']) {
+            winners.push(game['Away Team Name']);
+        } else {
+            winners.push("Tie");
+        }
+
+    });
+    return winners;
 }
 
+console.log(getWinners(fifaData, getFinals));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
