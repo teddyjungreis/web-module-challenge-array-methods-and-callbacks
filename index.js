@@ -13,16 +13,41 @@ const worldCup2014Final = fifaData.filter( game => {
     return game.Year === 2014 && game.Stage === "Final";
 });
 
-console.log(worldCup2014Final[0]["Home Team Name"]);
+let worldCup2014Home = worldCup2014Final[0]["Home Team Name"];
+
+console.log("Home Team Name:", worldCup2014Home);
 
 //(b) Away Team name for 2014 world cup final
 
+let worldCup2014Away = worldCup2014Final[0]["Away Team Name"];
+
+console.log("Away Team Name:", worldCup2014Away);
+
+
 //(c) Home Team goals for 2014 world cup final
+
+let worldCup2014HGoals= worldCup2014Final[0]["Home Team Goals"];
+
+console.log("Home Team Goals:", worldCup2014HGoals);
 
 //(d) Away Team goals for 2014 world cup final
 
+let worldCup2014AGoals= worldCup2014Final[0]["Away Team Goals"];
+
+console.log("Away Team Goals:", worldCup2014AGoals);
+
+
 //(e) Winner of 2014 world cup final */
 
+let worldCup2014Winner = "";
+
+if (worldCup2014HGoals > worldCup2014AGoals) {
+    worldCup2014Winner = worldCup2014Home;
+} else {
+    worldCup2014Winner = worldCup2014Away;
+}
+
+console.log(worldCup2014Winner);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use getFinals to do the following:
@@ -32,10 +57,21 @@ Use getFinals to do the following:
 💡 HINT - you should be looking at the stage key inside of the objects
 */
 
-function getFinals(/* code here */) {
-    /* code here */
+function getFinals(arr) {
+    const finalStageGames = arr.filter(game => {
+        return game.Stage === "Final"}
+        );
+    const finalStageTeams = finalStageGames.map(game => {
+        return {"Year": game["Year"],
+            "Home Team Name": game ["Home Team Name"],
+            "Away Team Name": game ["Away Team Name"] };
+    });
+    return (finalStageTeams);
  }
 
+getFinals(fifaData);
+
+ //const finalStageGames = arr.filter(game => {return game.Stage === "Final"})
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
